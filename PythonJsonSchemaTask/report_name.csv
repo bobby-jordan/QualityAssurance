@@ -1,0 +1,3 @@
+filename,sloc,comments,ratio_comment_to_code,mccabe,language
+json_schema.py,37,10,0.27,1,Python
+

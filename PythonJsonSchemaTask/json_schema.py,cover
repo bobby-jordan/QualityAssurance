@@ -1,0 +1,61 @@
+  #  -*- coding: utf-8 -*-
+  #  ! python
+> """This module is about json schema validation and unit test"""
+> import json
+> import jsonschema
+> from jsonschema import validate
+> import simplejson as json
+> import unittest
+  
+  
+! def validate_invalid():
+!     """Unit test validate invalid"""
+!     raise ValueError("Price must be a number, not a string")
+  
+  
+! def validate_valid():
+!     """Unit test validate valid"""
+!     print("The object is valid")
+  
+  
+! def validate_null():
+!     """Unit test for validation null"""
+!     raise ValueError("The object is null")
+  
+  
+! class TestJsonObjects(unittest.TestCase):
+  
+      # initialize the the schema object
+!     def setUp(self):
+>         self.schema = {
+>             "type": "object",
+>             "properties": {
+>                 "title": {"type": "string"},
+>                 "price": {"type": "number"},
+>             },
+>         }
+  
+      # assertion if json is null
+!     def test_json_is_null(self):
+>         schema = self.schema
+>         assertRaises = self.assertRaises
+>         error = ValueError
+>         assertRaises(error, None, validate({"title": "", "price": 10.00}, schema))
+  
+      # assertion if json is valid
+>     def test_json_is_valid(self):
+>         schema = self.schema
+>         e = None
+>         assertEqual = self.assertEqual
+!         assertEqual(e, validate({"title": "Eggs", "price": 34.99}, schema))
+  
+      # assertion if json is invalid
+>     def test_json_is_invalid(self):
+>         schema = self.schema
+>         assertRaises = self.assertRaises
+!         e = jsonschema.exceptions.ValidationError
+!         assertRaises(e, validate, {"title": "Milk", "price": "string"}, schema)
+  
+  
+! if __name__ == '__main__':
+!     unittest.main(verbosity=2)
